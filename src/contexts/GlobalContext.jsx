@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import Flag from "react-world-flags";
 
 const GlobalContext = createContext();
 
@@ -22,6 +23,17 @@ export const GlobalProvider = ({ Children }) => {
     function handleSearchClick() {
 
         fetchResult(searchMovie);
+    }
+    const nationsFlags = {
+        en: 'gb',
+        it: 'it',
+        fr: 'fr',
+        ja: 'jp',
+        ru: 'ru',
+        zh: 'cn',
+        de: 'de',
+        cs: 'cz',
+        es: 'es'
     }
     return (
         <GlobalContext.Provider value={{ movies, setMovies, searchMovie, setSearchMovie }}>
@@ -50,6 +62,7 @@ export const GlobalProvider = ({ Children }) => {
                 </div>
             </div>
             {Children}
+
         </GlobalContext.Provider>
     )
 }
