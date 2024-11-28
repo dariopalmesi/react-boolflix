@@ -1,3 +1,6 @@
+import { movieGlobalContext } from "../contexts/GlobalContext"
+
+
 export default function MoviesList() {
 
     return (
@@ -9,7 +12,6 @@ export default function MoviesList() {
                             movies.results.map(movie => (
                                 <div className="col" key={movie.id}>
                                     <div className="card">
-
                                         <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
                                         <ul>
                                             <li><h2>{movie.title}</h2></li>
