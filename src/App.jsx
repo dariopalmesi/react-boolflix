@@ -1,37 +1,36 @@
-import { useEffect, useState } from 'react'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import '../node_modules/bootstrap-icons/font/bootstrap-icons.min.css'
-
+import { useEffect, useState } from 'react';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap-icons/font/bootstrap-icons.min.css';
 
 function App() {
-  const [movies, setMovies] = useState({})
-  const [searchMovie, setSearchMovie] = useState('')
-  // const [movieFilter, setMovieFilter] = useState({})
+  const [movies, setMovies] = useState({});
+  const [searchMovie, setSearchMovie] = useState('');
 
 
-
-  function fetchResult(url = 'https://api.themoviedb.org/3/search/movie?api_key=2b129c72fa5c2722b105bdcef3d40597&query=matrix') {
+  function fetchResult(query) {
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=2b129c72fa5c2722b105bdcef3d40597&query=${query}`;
     fetch(url)
-      .then(resp => resp.json())
-      .then(results => {
+      .then((resp) => resp.json())
+      .then((results) => {
         console.log(results);
-        setMovies(results)
-
+        setMovies(results);
       })
+      .catch((error) => console.error('Errore nella chiamata API:', error));
   }
-  function handleSearchClick() {
-    const movieFilter = movies.filter((movie) => movie.includes(searchMovie))
-    console.log(movieFilter);
-    setSearchMovie(movieFilter)
 
-    fetchResult()
+
+  function handleSearchClick() {
+
+    fetchResult(searchMovie);
   }
-  useEffect(fetchResult, [])
+
   return (
     <>
       <div className="container">
         <div className="mb-3">
-          <label htmlFor="" className="form-label">Name</label>
+          <label htmlFor="searchText" className="form-label">
+            Name
+          </label>
           <input
             type="search"
             className="form-control"
@@ -39,20 +38,18 @@ function App() {
             id="searchText"
             aria-describedby="searchHelper"
             placeholder="Search..."
+            value={searchMovie}
+            onChange={(e) => setSearchMovie(e.target.value)}
           />
           <button
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-primary mt-2"
             onClick={handleSearchClick}
           >
             Submit
           </button>
-
         </div>
       </div>
-
-
-
 
       <section className='characters'>
         <div className="container">
@@ -79,7 +76,8 @@ function App() {
         </div>
       </section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
