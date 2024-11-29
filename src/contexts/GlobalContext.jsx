@@ -9,20 +9,21 @@ function GlobalContextProvider({ children }) {
 
     const api_key = import.meta.env.VITE_MOVIE_DB_API_KEY;
     const api_movies = 'https://api.themoviedb.org/3/search/movie?'
-    const api_tv = 'https://api.themoviedb.org/3/search/tv?'
+    const api_tv = `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${searchMovie}`
 
     const values = {
         movies,
         searchMovie,
         setSearchMovie,
-        fetchMovies,
         handleSearchClick,
+        api_movies,
+
     }
 
 
 
     function fetchMovies(query) {
-        const url = `${api_movies}api_key=${api_key}&query=${query}`;
+        const url = `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${searchMovie}`;
         fetch(url)
             .then((resp) => resp.json())
             .then((results) => {
