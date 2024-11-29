@@ -1,9 +1,14 @@
 li:hover {
     list-style: none;
     padding: 0.5rem;
-    display: block;
 }
 
 ul {
     display: none;
+}
+
+.card {
+    ul::hover {
+        display: block;
+    }
 }
