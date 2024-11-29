@@ -7,8 +7,9 @@ function GlobalContextProvider({ children }) {
     const [movies, setMovies] = useState({});
     const [searchMovie, setSearchMovie] = useState('');
 
+
     const api_key = import.meta.env.VITE_MOVIE_DB_API_KEY;
-    const api_movies = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchMovie}`
+    const api_movies = `https://api.themoviedb.org/3/search/multi`
 
     const nationsFlags = {
         en: 'gb',

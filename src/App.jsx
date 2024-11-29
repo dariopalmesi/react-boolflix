@@ -51,14 +51,12 @@ function App() {
                   <div className="card">
                     <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
                     <ul>
-                      <li >
-
-                        {movie.original_title} <br />
-                        {movie.title} <br />
-                        {movie.vote_average} <br />
-                        <Flag code={nationsFlags[movie.original_language]} style={{ height: 20 }} />
-
-                      </li>
+                      <li> {movie.title} </li>
+                      <li>{movie.original_name}</li>
+                      <li>{movie.overview}</li>
+                      <li>{movie.original_title} </li>
+                      <li><Flag code={nationsFlags[movie.original_language]} style={{ height: 20 }} /></li>
+                      <li>{movie.vote_average} </li>
                     </ul>
                   </div>
 
