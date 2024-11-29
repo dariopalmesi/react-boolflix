@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import Flag from "react-world-flags";
 
 const GlobalContext = createContext();
 
