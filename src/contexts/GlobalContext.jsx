@@ -3,9 +3,18 @@ import Flag from "react-world-flags";
 
 const GlobalContext = createContext();
 
-export const GlobalProvider = ({ Children }) => {
+function GlobalContextProvider({ Children }) {
     const [movies, setMovies] = useState({});
     const [searchMovie, setSearchMovie] = useState('');
+
+    const values = {
+        movies,
+        searchMovie,
+        setSearchMovie,
+        fetchResult,
+        handleSearchClick,
+    }
+
 
 
     function fetchResult(query) {
@@ -36,11 +45,11 @@ export const GlobalProvider = ({ Children }) => {
         es: 'es'
     }
     return (
-        <GlobalContext.Provider value={{ movies, setMovies, searchMovie, setSearchMovie }}>
+        <GlobalContext.Provider value={{ values }}>
             <div className="container">
                 <div className="mb-3">
                     <label htmlFor="searchText" className="form-label">
-                        Name
+                        Scrivi la tua ricerca
                     </label>
                     <input
                         type="search"
@@ -57,13 +66,39 @@ export const GlobalProvider = ({ Children }) => {
                         className="btn btn-primary mt-2"
                         onClick={handleSearchClick}
                     >
-                        Submit
+                        Cerca
                     </button>
                 </div>
             </div>
             {Children}
-
+            {/* <section className='characters'>
+                <div className="container">
+                    <div className='row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3'>
+                        {
+                            movies.results ?
+                                movies.results.map(movie => (
+                                    <div className="col" key={movie.id}>
+                                        <div className="card">
+                                            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                                            <ul>
+                                                <li><h2>{movie.title}</h2></li>
+                                                <li>{movie.original_title}</li>
+                                                <li><Flag code={nationsFlags[movie.original_language]} style={{ height: 20 }} /></li>
+                                                <li>{movie.vote_average}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                )) :
+                                <p>No result yet</p>
+                        }
+                    </div>
+                </div>
+            </section> */}
         </GlobalContext.Provider>
     )
 }
-export const movieGlobalContext = () => useContext(GlobalContext)
+function useGlobalContext() {
+    return useContext(GlobalContext);
+}
+
+export { GlobalContextProvider, useGlobalContext }

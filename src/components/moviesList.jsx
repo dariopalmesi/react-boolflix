@@ -1,8 +1,10 @@
-import { movieGlobalContext } from "../contexts/GlobalContext"
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 
 export default function MoviesList() {
-    const [movies, fetchResult] = movieGlobalContext();
+    const { movies } = useGlobalContext();
+
+
     <section className='characters'>
         <div className="container">
             <div className='row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3'>
