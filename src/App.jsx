@@ -10,10 +10,10 @@ function App() {
     const { searchMovie, setSearchMovie, handleSearchClick } = useGlobalContext()
 
     return (
-      <header>
-        <div className="container d-flex justify-content-end align-items-center gap-3">
-          <div className="mb-3 ">
-            <label htmlFor="searchText" className="form-label">
+      <header className='bg-black'>
+        <div className="container d-flex justify-content-end align-items-center gap-3 p-3">
+          <div className="mb-3 d-flex align-items-center gap-3 ">
+            <label htmlFor="searchText" className="form-label text-white">
               Scrivi la tua ricerca
             </label>
             <input
@@ -28,7 +28,7 @@ function App() {
             />
             <button
               type="submit"
-              className="btn btn-primary mt-2"
+              className="btn btn-dark mt-2"
               onClick={handleSearchClick}
             >
               Cerca
@@ -56,7 +56,7 @@ function App() {
       return completeStars
     }
     return (
-      <main>
+      <main className='bg-dark'>
         <section className='characters'>
           <div className="container">
             <div className='row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3'>
