@@ -1,6 +1,7 @@
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap-icons/font/bootstrap-icons.min.css';
 import { GlobalContextProvider, useGlobalContext } from './contexts/GlobalContext';
+import AppLogo from './components/AppLogo';
 import Flag from "react-world-flags";
 
 function App() {
@@ -10,14 +11,14 @@ function App() {
 
     return (
       <header>
-        <div className="container">
-          <div className="mb-3">
+        <div className="container d-flex justify-content-end align-items-center gap-3">
+          <div className="mb-3 ">
             <label htmlFor="searchText" className="form-label">
               Scrivi la tua ricerca
             </label>
             <input
               type="search"
-              className="form-control"
+              className=""
               name="searchText"
               id="searchText"
               aria-describedby="searchHelper"
@@ -40,6 +41,20 @@ function App() {
 
   function AppMain() {
     const { movies, nationsFlags } = useGlobalContext()
+    const numberIntegral = (vote) => {
+      const numberStars = Math.ceil(vote * 0.5)
+      const completeStars = []
+
+      for (let i = 1; i <= 5; i++) {
+        if (i <= numberStars) {
+          completeStars.push(<i key={i} className="bi bi-star-fill text-warning me-2"></i>);
+        } else {
+          completeStars.push(<i key={i} className="bi bi-star text-warning me-2"></i>);
+        }
+      }
+
+      return completeStars
+    }
     return (
       <main>
         <section className='characters'>
@@ -56,7 +71,7 @@ function App() {
                       <li>{movie.overview}</li>
                       <li>{movie.original_title} </li>
                       <li><Flag code={nationsFlags[movie.original_language]} style={{ height: 20 }} /></li>
-                      <li>{movie.vote_average} </li>
+                      <li>{numberIntegral(movie.vote_average)} </li>
                     </ul>
                   </div>
 
@@ -76,6 +91,7 @@ function App() {
   return (
     <>
       <GlobalContextProvider>
+        <AppLogo />
         <AppHeader />
         <AppMain />
       </GlobalContextProvider>
