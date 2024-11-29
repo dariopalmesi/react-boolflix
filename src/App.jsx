@@ -1,6 +1,7 @@
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap-icons/font/bootstrap-icons.min.css';
 import { GlobalContextProvider, useGlobalContext } from './contexts/GlobalContext';
+import Flag from "react-world-flags";
 
 function App() {
 
@@ -38,21 +39,34 @@ function App() {
   }
 
   function AppMain() {
-    const { movies } = useGlobalContext()
+    const { movies, nationsFlags } = useGlobalContext()
     return (
       <main>
         <section className='characters'>
           <div className="container">
             <div className='row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3'>
-              {movies && movies.map((movie, index) => (
-                <li key={index} style={{ borderBottom: '1px solid black', marginBottom: '1rem' }}>
-                  {movie.original_title} <br />
-                  {movie.title} <br />
-                  {movie.vote_average} <br />
-                  {movie.original_language}
 
-                </li>
+              {movies.results && movies.results.map((movie, index) => (
+                <div className="col" key={index} >
+                  <div className="card">
+                    <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                    <ul>
+                      <li >
+
+                        {movie.original_title} <br />
+                        {movie.title} <br />
+                        {movie.vote_average} <br />
+                        <Flag code={nationsFlags[movie.original_language]} style={{ height: 20 }} />
+
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+
               ))}
+
+
             </div>
           </div>
         </section>
