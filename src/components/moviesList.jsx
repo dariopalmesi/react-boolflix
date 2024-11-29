@@ -3,6 +3,8 @@ import { useGlobalContext } from "../contexts/GlobalContext";
 
 export default function MoviesList() {
     const { movies } = useGlobalContext();
+    console.log(movies);
+
 
 
     <section className='characters'>
