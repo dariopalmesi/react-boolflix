@@ -7,6 +7,16 @@ ul {
     display: none;
 }
 
+
+.card {
+    position: relative;
+}
+
 .card:hover ul {
     display: block;
+    position: absolute;
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    color: white;
 }
