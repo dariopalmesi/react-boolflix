@@ -4,11 +4,15 @@ const GlobalContext = createContext();
 
 function GlobalContextProvider({ children }) {
     const [movies, setMovies] = useState({});
+    const [shows, setShows] = useState({});
     const [searchMovie, setSearchMovie] = useState('');
+    const [searchShows, setSearchShows] = useState('');
+
 
 
     const api_key = import.meta.env.VITE_MOVIE_DB_API_KEY;
-    const api_movies = `https://api.themoviedb.org/3/search/multi`
+    const api_movies = `https://api.themoviedb.org/3/search/movie`
+    const api_show = `https://api.themoviedb.org/3/search/tv`
 
     const nationsFlags = {
         en: 'gb',
@@ -19,8 +23,21 @@ function GlobalContextProvider({ children }) {
         zh: 'cn',
         de: 'de',
         cs: 'cz',
-        es: 'es'
-    }
+        es: 'es',
+        ar: 'sa',
+        pt: 'pt',
+        nl: 'nl',
+        ko: 'kr',
+        sv: 'se',
+        tr: 'tr',
+        pl: 'pl',
+        el: 'gr',
+        hi: 'in',
+        no: 'no',
+        fi: 'fi',
+        da: 'dk'
+    };
+
 
     const values = {
         movies,
@@ -28,7 +45,11 @@ function GlobalContextProvider({ children }) {
         setSearchMovie,
         handleSearchClick,
         api_movies,
-        nationsFlags
+        nationsFlags,
+        shows,
+        setShows,
+        setSearchShows,
+        searchShows
     }
 
 
@@ -44,11 +65,23 @@ function GlobalContextProvider({ children }) {
             .catch((error) => console.error('Errore nella chiamata API:', error));
     }
 
+    function fetchShows() {
+        const url = `${api_show}?api_key=${api_key}&query=${searchMovie}`;
+        fetch(url)
+            .then((resp) => resp.json())
+            .then((results) => {
+                console.log(results);
+                setShows(results);
+            })
+            .catch((error) => console.error('Errore nella chiamata API:', error));
+    }
+
 
 
     function handleSearchClick() {
 
         fetchMovies(searchMovie);
+        fetchShows(searchShows)
     }
 
     return (

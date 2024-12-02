@@ -1,4 +1,4 @@
-import logo from '../../public/img/netflix.png'
+import logo from '/img/netflix.png'
 
 export default function AppLogo() {
 

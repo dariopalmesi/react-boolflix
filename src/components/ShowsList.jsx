@@ -1,8 +1,8 @@
 import { useGlobalContext } from "../contexts/GlobalContext"
 import Flag from "react-world-flags";
-export default function MovieList() {
+export default function ShowList() {
 
-    const { movies, nationsFlags } = useGlobalContext()
+    const { shows, nationsFlags } = useGlobalContext()
     const numberIntegral = (vote) => {
         const numberStars = Math.ceil(vote * 0.5)
         const completeStars = []
@@ -22,18 +22,17 @@ export default function MovieList() {
             <section className='characters'>
                 <div>
                     <div className='row row-cols-1 row-cols-md-2 row-cols-lg-6 g-3'>
-                        {movies.results && movies.results.map((movie, index) => (
+                        {shows.results && shows.results.map((show, index) => (
                             <div className="col" key={index} >
-                                <h2 className="text-white">Movies</h2>
+                                <h2 className="text-white">Tv Series</h2>
                                 <div className="card">
-                                    <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                                    <img src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`} alt={show.title} />
                                     <ul>
-                                        <li> {movie.title} </li>
-                                        <li>{movie.original_name}</li>
-                                        <li>{movie.overview}</li>
-                                        <li>{movie.original_title} </li>
-                                        <li><Flag code={nationsFlags[movie.original_language]} style={{ height: 20 }} /></li>
-                                        <li>{numberIntegral(movie.vote_average)} </li>
+                                        <li> {show.name} </li>
+                                        <li>{show.original_name}</li>
+                                        <li>{show.overview}</li>
+                                        <li><Flag code={nationsFlags[show.original_language]} style={{ height: 20 }} /></li>
+                                        <li>{numberIntegral(show.vote_average)} </li>
                                     </ul>
                                 </div>
 
